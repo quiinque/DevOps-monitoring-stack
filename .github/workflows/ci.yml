@@ -1,0 +1,19 @@
+name: DevOps Monitoring Stack CI
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Check docker-compose file exists
+        run: test -f docker-compose.yml
+
+      - name: Validate docker-compose
+        run: docker compose config
